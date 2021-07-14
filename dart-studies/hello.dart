@@ -1,8 +1,9 @@
-void main(){
+void main() {
   print("Iniciando meu primeiro código em Dart!");
 
   var nome = 'Gabriel';
-  var ano_nascimento = 2001;
+  var anoNascimento = 2001;
+  var anoAtual = 2021;
   var planetas = ['Terra', 'Marte', 'Júpiter'];
   var imagem = {
     'tags': ['marte'],
@@ -10,6 +11,7 @@ void main(){
   };
 
   print('Programador: $nome, programando em Dart');
-  print('Ano de nascimento: $ano_nascimento');
+  print('Ano de nascimento: $anoNascimento');
   print('Planetas favoritos: $planetas');
+  print('Imagem: $imagem');
 }
