@@ -2,6 +2,8 @@ import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:microblog/controladores/ControladorUsuario.dart';
+import 'package:microblog/util/BotaoPadrao.dart';
+import 'package:microblog/util/PerfilWidget.dart';
 
 import '../controladores/ControladorUsuario.dart';
 import '../model/Usuario.dart';
@@ -28,45 +30,60 @@ class _TelaPerfilState extends State<TelaPerfil>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.deepPurpleAccent,
-          title: Text("Este é o seu perfil"),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  _controladorUsuario.logoutUsuario();
-                  Navigator.pushReplacementNamed(context, "/splash");
-                })
-          ],
-        ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Card(
-                  margin: EdgeInsets.zero,
-                  child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Wrap(
-                        spacing: 16,
-                        runSpacing: 16,
-                        children: [Text("Estes são os seus dados!")],
-                      ))),
-              Column(
-                children: [
-                  Text("Nome: ${_usuarioLogado.nome}"),
-                  const SizedBox(height: 4),
-                  Text("e-mail cadastrado: ${_usuarioLogado.email}")
-                ],
-              )
-            ],
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurpleAccent,
+        title: Text("Este é o seu perfil"),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _controladorUsuario.logoutUsuario();
+                Navigator.pushReplacementNamed(context, "/splash");
+              })
+        ],
+      ),
+      body: ListView(
+        padding: EdgeInsets.all(25),
+        physics: BouncingScrollPhysics(),
+        children: [
+          PerfilWidget(
+            linkImagem:
+                "https://i.pinimg.com/564x/2b/23/f6/2b23f6ee9fbc16112ac00b5c0d909959.jpg",
           ),
-        ));
+          const SizedBox(height: 24),
+          buildNomeUsuario(_usuarioLogado),
+          const SizedBox(height: 24),
+          const SizedBox(height: 24),
+          Center(
+            child: Text("Zona de Perigo!",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+          ),
+          Center(
+            child: BotaoPadrao(
+              background: Colors.redAccent,
+              value: "Editar senha",
+              onTap: () {},
+            ),
+          ),
+          const SizedBox(height: 24),
+        ],
+      ),
+    );
   }
+
+  Widget buildNomeUsuario(Usuario usuario) => Column(
+        children: [
+          Text(
+            usuario.nome,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          ),
+          const SizedBox(height: 4),
+          Text(usuario.email, style: TextStyle(color: Colors.grey)),
+        ],
+      );
 
   @override
   void afterFirstLayout(BuildContext context) {
