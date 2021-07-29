@@ -5,11 +5,11 @@ class DadosPerfilWidget extends StatelessWidget {
   Widget build(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          buildButton(context, '5.0', 'Ranking'),
+          buildButton(context, '5.0', 'Strength'),
           buildDivider(),
-          buildButton(context, '35', 'Following'),
+          buildButton(context, '5', 'Seguindo'),
           buildDivider(),
-          buildButton(context, '50', 'Followers'),
+          buildButton(context, '20', 'Seguidores'),
         ],
       );
   Widget buildDivider() => Container(

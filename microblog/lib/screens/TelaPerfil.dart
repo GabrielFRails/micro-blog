@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:microblog/controladores/ControladorUsuario.dart';
 import 'package:microblog/util/BotaoPadrao.dart';
+import 'package:microblog/util/DadosPerfilWidget.dart';
 import 'package:microblog/util/PerfilWidget.dart';
 
 import '../controladores/ControladorUsuario.dart';
@@ -56,7 +57,8 @@ class _TelaPerfilState extends State<TelaPerfil>
           const SizedBox(height: 24),
           buildNomeUsuario(_usuarioLogado),
           const SizedBox(height: 24),
-          const SizedBox(height: 24),
+          DadosPerfilWidget(),
+          const SizedBox(height: 50),
           Center(
             child: Text("Zona de Perigo!",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
@@ -64,7 +66,7 @@ class _TelaPerfilState extends State<TelaPerfil>
           Center(
             child: BotaoPadrao(
               background: Colors.redAccent,
-              value: "Editar senha",
+              value: "Editar Perfil",
               onTap: () {},
             ),
           ),
@@ -84,6 +86,10 @@ class _TelaPerfilState extends State<TelaPerfil>
           Text(usuario.email, style: TextStyle(color: Colors.grey)),
         ],
       );
+
+  Widget buildBotaoEditar(Color color) => buildCircle();
+
+  Widget buildCircle{(Widget child, double all, Color color}) => 
 
   @override
   void afterFirstLayout(BuildContext context) {

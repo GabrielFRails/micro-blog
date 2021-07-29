@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:microblog/controladores/ControladorFeed.dart';
-import 'package:microblog/controladores/ControladorUsuario.dart';
 import 'package:microblog/util/PublicacaoWidget.dart';
 import 'package:microblog/util/StatusConculta.dart';
 import 'package:microblog/util/UtilDataHora.dart';
