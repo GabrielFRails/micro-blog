@@ -23,7 +23,6 @@ class _TelaPrincipalState extends State<TelaPrincipal>
       RefreshController(initialRefresh: false);
   ControladorFeed _controladorFeed = GetIt.I.get<ControladorFeed>();
   BuildContext mMainContext;
-  ControladorUsuario _controladorUsuario = GetIt.I.get<ControladorUsuario>();
 
   @override
   void initState() {
@@ -52,12 +51,11 @@ class _TelaPrincipalState extends State<TelaPrincipal>
         actions: <Widget>[
           IconButton(
               icon: Icon(
-                Icons.logout,
+                Icons.person,
                 color: Colors.white,
               ),
               onPressed: () {
-                _controladorUsuario.logoutUsuario();
-                Navigator.pushReplacementNamed(context, "/splash");
+                Navigator.pushNamed(context, "/telaPerfil");
               })
         ],
       ),
