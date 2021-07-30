@@ -80,8 +80,15 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                         primary: false,
                         itemBuilder: (context, index) {
                           var post = _controladorFeed.mPostagens[index];
-                          //bool isPostLike = post.likes.length != 0 ? true : false;
-                          //var quantidadeLikes = post.likes.length;
+                          bool isPostLike;
+                          int quantidadeLikes;
+                          if (post.likes == null || post.likes.length == 0) {
+                            isPostLike = false;
+                            quantidadeLikes = 0;
+                          } else if (post.likes.length > 0) {
+                            isPostLike = true;
+                            quantidadeLikes = post.likes.length;
+                          }
                           return Card(
                               child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -92,7 +99,12 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("${post.criador.nome}"),
+                                    Text(
+                                      "${post.criador.nome}",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
                                     Visibility(
                                       visible: post.isCriador,
                                       child: Row(
@@ -126,15 +138,17 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                                     children: [
                                       LikeButton(
                                         size: 35,
-                                        //isLiked: isPostLike,
-                                        //likeCount: 0,
+                                        isLiked: isPostLike,
+                                        likeCount: quantidadeLikes,
                                         onTap: (isLiked) async {
-                                          if (isLiked == true) {
+                                          if (isLiked == false) {
                                             _controladorFeed
                                                 .darLikeNaPostagem(post);
+                                            _consultarFeed();
                                           } else {
                                             _controladorFeed
                                                 .removerLikeNaPostagem(post);
+                                            _consultarFeed();
                                           }
                                           return !isLiked;
                                         },
