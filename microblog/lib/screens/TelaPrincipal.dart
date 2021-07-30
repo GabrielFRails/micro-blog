@@ -2,7 +2,9 @@ import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:like_button/like_button.dart';
 import 'package:microblog/controladores/ControladorFeed.dart';
+import 'package:microblog/model/Postagem.dart';
 import 'package:microblog/util/PublicacaoWidget.dart';
 import 'package:microblog/util/StatusConculta.dart';
 import 'package:microblog/util/UtilDataHora.dart';
@@ -78,6 +80,8 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                         primary: false,
                         itemBuilder: (context, index) {
                           var post = _controladorFeed.mPostagens[index];
+                          //bool isPostLike = post.likes.length != 0 ? true : false;
+                          //var quantidadeLikes = post.likes.length;
                           return Card(
                               child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -120,6 +124,21 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
+                                      LikeButton(
+                                        size: 35,
+                                        //isLiked: isPostLike,
+                                        //likeCount: 0,
+                                        onTap: (isLiked) async {
+                                          if (isLiked == true) {
+                                            _controladorFeed
+                                                .darLikeNaPostagem(post);
+                                          } else {
+                                            _controladorFeed
+                                                .removerLikeNaPostagem(post);
+                                          }
+                                          return !isLiked;
+                                        },
+                                      ),
                                       Container(),
                                       Text(UtilDataHora.converteDateTime(
                                           post.dataPostagem))

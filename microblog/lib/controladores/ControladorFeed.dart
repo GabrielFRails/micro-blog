@@ -80,4 +80,34 @@ abstract class _ControladorFeedBase with Store {
       mStatusConsultaFeed = StatusConsulta.FALHA;
     });
   }
+
+  void darLikeNaPostagem(Postagem postagem,
+      {Function() sucesso,
+      Function() carregando,
+      Function(String mensagem) erro}) {
+    carregando?.call();
+    mService
+        .darLikeNaPublicacao(
+            GetIt.I.get<ControladorUsuario>().mUsuarioLogado, postagem.id)
+        .then((value) {
+      sucesso?.call();
+    }).catchError((onError) {
+      erro?.call(onError.response.data["falha"]);
+    });
+  }
+
+  void removerLikeNaPostagem(Postagem postagem,
+      {Function() sucesso,
+      Function() carregando,
+      Function(String mensagem) erro}) {
+    carregando?.call();
+    mService
+        .removerLike(
+            postagem.id, GetIt.I.get<ControladorUsuario>().mUsuarioLogado.id)
+        .then((value) {
+      sucesso?.call();
+    }).catchError((onError) {
+      erro?.call(onError.response.data["falha"]);
+    });
+  }
 }

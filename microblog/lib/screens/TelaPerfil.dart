@@ -5,6 +5,7 @@ import 'package:microblog/controladores/ControladorUsuario.dart';
 import 'package:microblog/util/BotaoPadrao.dart';
 import 'package:microblog/util/DadosPerfilWidget.dart';
 import 'package:microblog/util/PerfilWidget.dart';
+import 'package:microblog/util/UtilDialogo.dart';
 
 import '../controladores/ControladorUsuario.dart';
 import '../model/Usuario.dart';
@@ -66,8 +67,10 @@ class _TelaPerfilState extends State<TelaPerfil>
           Center(
             child: BotaoPadrao(
               background: Colors.redAccent,
-              value: "Editar Perfil",
-              onTap: () {},
+              value: "Editar sua senha",
+              onTap: () {
+                UtilDialogo.editarSenha(context, _usuarioLogado);
+              },
             ),
           ),
           const SizedBox(height: 24),

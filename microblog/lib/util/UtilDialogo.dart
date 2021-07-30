@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:microblog/controladores/ControladorFeed.dart';
 import 'package:microblog/model/Postagem.dart';
+import 'package:microblog/model/Usuario.dart';
+import 'package:microblog/util/AlterarSenhaWidget.dart';
 import 'package:microblog/util/BotaoPadrao.dart';
 import 'package:microblog/util/PublicacaoWidget.dart';
 
@@ -145,6 +147,40 @@ class UtilDialogo {
                   Divider(),
                   PublicacaoWidget(
                     postagemEditar: postagem,
+                    sucesso: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  static void editarSenha(BuildContext mainContext, Usuario usuario) {
+    //ControladorFeed _controladorFeed = GetIt.I.get<ControladorFeed>();
+    showDialog(
+      context: mainContext,
+      builder: (context) {
+        return Center(
+          child: Card(
+            margin: EdgeInsets.all(20),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Atenção! você está editando sua senha",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  Divider(),
+                  AlterarSenhaWidget(
+                    usuarioEditar: usuario,
                     sucesso: () {
                       Navigator.pop(context);
                     },

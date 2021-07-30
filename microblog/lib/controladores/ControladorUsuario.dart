@@ -55,6 +55,15 @@ abstract class _ControladorUsuarioBase with Store {
     }
   }
 
+  void editarUsuario(Usuario usuarioEditar,
+      {Function() sucesso, Function(String mensagem) erro}) {
+    mService.editarUsuario(usuarioEditar).then((usuario) {
+      sucesso?.call();
+    }).catchError((onError) {
+      erro?.call(onError.response.data["falha"]);
+    });
+  }
+
   void logarUsuario(Usuario usuarioLogar,
       {Function() sucesso, Function(String mensagem) erro}) {
     if ((usuarioLogar.email?.isEmpty ?? true) ||

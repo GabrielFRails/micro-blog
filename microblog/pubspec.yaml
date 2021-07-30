@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
 
   intl: ^0.16.1
+  like_button: any
   dio: any
   shared_preferences: any
   mobx: ^1.0.2+2
