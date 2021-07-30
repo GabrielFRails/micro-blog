@@ -4,7 +4,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:like_button/like_button.dart';
 import 'package:microblog/controladores/ControladorFeed.dart';
-import 'package:microblog/model/Postagem.dart';
+import 'package:microblog/controladores/ControladorUsuario.dart';
+import 'package:microblog/model/Usuario.dart';
 import 'package:microblog/util/PublicacaoWidget.dart';
 import 'package:microblog/util/StatusConculta.dart';
 import 'package:microblog/util/UtilDataHora.dart';
@@ -24,6 +25,7 @@ class _TelaPrincipalState extends State<TelaPrincipal>
       RefreshController(initialRefresh: false);
   ControladorFeed _controladorFeed = GetIt.I.get<ControladorFeed>();
   BuildContext mMainContext;
+  Usuario _usuarioLogado = GetIt.I.get<ControladorUsuario>().mUsuarioLogado;
 
   @override
   void initState() {
@@ -82,9 +84,19 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                           var post = _controladorFeed.mPostagens[index];
                           bool isPostLike;
                           int quantidadeLikes;
-                          if (post.likes == null || post.likes.length == 0) {
+                          if (post.likes == null) {
                             isPostLike = false;
                             quantidadeLikes = 0;
+                          } else if (post.likes.indexWhere(
+                                  (like) => like.id == _usuarioLogado.id) ==
+                              -1) {
+                            isPostLike = false;
+                            quantidadeLikes = post.likes.length;
+                          } else if (post.likes.indexWhere(
+                                  (like) => like.id == _usuarioLogado.id) !=
+                              -1) {
+                            isPostLike = true;
+                            quantidadeLikes = post.likes.length;
                           } else if (post.likes.length > 0) {
                             isPostLike = true;
                             quantidadeLikes = post.likes.length;
