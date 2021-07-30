@@ -118,7 +118,7 @@ export class PostagemService {
       } else {
         this.db.doc(`publicacoesGabriel/${idPostagem}`).get().then((postSnap) => {
           postagem = Postagem.toPostagem(postSnap.data());
-          if (postagem.likes === undefined) postagem.likes = [];
+          if (postagem.likes === undefined || postagem.likes === null) postagem.likes = [];
           postagem.likes.push(like);
           return postSnap.ref.set(postagem.toJson());
         }).then((_) => {

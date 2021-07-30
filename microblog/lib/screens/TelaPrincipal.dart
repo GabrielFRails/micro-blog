@@ -156,11 +156,11 @@ class _TelaPrincipalState extends State<TelaPrincipal>
                                           if (isLiked == false) {
                                             _controladorFeed
                                                 .darLikeNaPostagem(post);
-                                            _consultarFeed();
+                                            //_consultarFeed();
                                           } else {
                                             _controladorFeed
                                                 .removerLikeNaPostagem(post);
-                                            _consultarFeed();
+                                            //_consultarFeed();
                                           }
                                           return !isLiked;
                                         },
