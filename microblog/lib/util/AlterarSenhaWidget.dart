@@ -5,6 +5,7 @@ import 'package:microblog/controladores/ControladorUsuario.dart';
 import 'package:microblog/model/Usuario.dart';
 import 'package:microblog/util/BotaoPadrao.dart';
 import 'package:microblog/util/TextFieldPadrao.dart';
+import 'package:microblog/util/UtilDialogo.dart';
 
 class AlterarSenhaWidget extends StatefulWidget {
   final Usuario usuarioEditar;
@@ -57,7 +58,11 @@ class _AlterarSenhaWidgetState extends State<AlterarSenhaWidget> {
                           onTap: () {
                             _controladorUsuario.editarUsuario(_usuarioLogado);
                             _controladorUsuario.logoutUsuario();
-                            Navigator.pushReplacementNamed(context, "/splash");
+                            UtilDialogo.exibirLoading(context);
+                            Future.delayed(Duration(seconds: 2)).then((value) {
+                              Navigator.pushReplacementNamed(
+                                  context, "/splash");
+                            });
                           }));
                 })
               ],

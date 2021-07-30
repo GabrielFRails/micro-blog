@@ -33,7 +33,7 @@ class _TelaSplashState extends State<TelaSplash> {
         children: [
           Center(
             child: Text(
-              "Carregando...",
+              "Carregando o Micro Blog...",
               style: TextStyle(
                   fontSize: 24,
                   color: Colors.white,
