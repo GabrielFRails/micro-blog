@@ -87,10 +87,6 @@ class _TelaPerfilState extends State<TelaPerfil>
         ],
       );
 
-  Widget buildBotaoEditar(Color color) => buildCircle();
-
-  Widget buildCircle{(Widget child, double all, Color color}) => 
-
   @override
   void afterFirstLayout(BuildContext context) {
     // TODO: implement afterFirstLayout
