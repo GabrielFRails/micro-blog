@@ -13,7 +13,7 @@ const db = admin.firestore();
 const usuarioExpressGabriel = express();
 const usuarioService = new UsuarioService(db);
 
-usuarioExpressGabriel.get("/servicoTeste", (req, res) => res.send("Teste feito com sucesso! Servidor ok!"));
+usuarioExpressGabriel.get("/servicoTeste", (req, res) => res.send("Teste feito com sucesso! Servidor rodando ok!"));
 
 usuarioExpressGabriel.post("/cadastrarUsuario", (req, res) => usuarioService.cadastrarUsuario(req, res));
 
