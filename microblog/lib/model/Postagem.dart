@@ -1,13 +1,3 @@
-/* {
-            "id": "16oc9Xppo0JVZRMzGIFr",
-            "conteudo": "Última Postagem Feita",
-            "dataPostagem": "2021-07-21T21:12:41.229Z",
-            "criador": {
-                "nome": "Gabriel F.",
-                "email": "gabriel@exemple.com",
-                "id": "pnYPgGp6DYRwZAzs8Saa"
-            }
-        } */
 import 'package:get_it/get_it.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:microblog/controladores/ControladorUsuario.dart';

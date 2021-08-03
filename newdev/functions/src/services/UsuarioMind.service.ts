@@ -1,9 +1,9 @@
 import {firestore} from "firebase-admin";
 import {Request, Response} from "express";
-import {ManterUsuario} from "../model/ManterUsuario";
+import {ManterUsuarioMind} from "../model/ManterUsuarioMind";
 import {HttpUtil} from "../Util/HttpUtil";
 
-export class UsuarioService {
+export class UsuarioMindService {
     private db: firestore.Firestore;
 
     constructor(db: firestore.Firestore) {
@@ -14,28 +14,28 @@ export class UsuarioService {
      * O serviço cadastra o usuário, validando a sua existência
      */
     public cadastrarUsuario(request: Request, response: Response) {
-      const usuario: ManterUsuario = ManterUsuario.toManterUsuario(request.body);
+      const usuarioMind: ManterUsuarioMind = ManterUsuarioMind.toManterUsuarioMind(request.body);
 
-      if (usuario.isUsuarioValido()) {
-        this.db.collection("usuariosGabriel").where("email", "==", usuario.email).get()
+      if (usuarioMind.isUsuarioMindValido()) {
+        this.db.collection("usuariosMindGabriel").where("email", "==", usuarioMind.email).get()
             .then((usuariosSnaps) => {
               if (usuariosSnaps.size === 0) {
                 const id = this.db.collection("xis").doc().id;
-                usuario.id = id;
-                return this.db.doc(`usuariosGabriel/${id}`).create(usuario.toJson());
+                usuarioMind.id = id;
+                return this.db.doc(`usuariosMindGabriel/${id}`).create(usuarioMind.toJson());
               } else {
-                HttpUtil.falha("O usuário já existe, não é possível cadastrar", response);
+                HttpUtil.falha("O usuário mind já existe, não é possível cadastrar", response);
                 return null;
               }
             }).then((responseCriacaoUsuario) => {
               if (responseCriacaoUsuario !== null) {
-                HttpUtil.sucesso(usuario, response);
+                HttpUtil.sucesso(usuarioMind, response);
               }
             }).catch((erro) =>{
               HttpUtil.falha("Ops, tive uma falha" + erro, response);
             });
       } else {
-        HttpUtil.falha("Usuário Inválido", response);
+        HttpUtil.falha("Usuário Mind Inválido", response);
       }
     }
 
@@ -47,15 +47,15 @@ export class UsuarioService {
       const senha = request.query.senha;
 
       if (email===null || email==="" || senha===null || senha==="") {
-        HttpUtil.falha("Usuário ou senha incorretos", response);
+        HttpUtil.falha("Usuário ou senha incorretos/nulos", response);
       } else {
-        this.db.collection("usuariosGabriel").where("email", "==", email).where("senha", "==", senha)
-            .get().then((usuarioConsultaSnap) => {
-              if (usuarioConsultaSnap.empty) {
-                HttpUtil.falha("Usuário ou senha incorretos!", response);
+        this.db.collection("usuariosMindGabriel").where("email", "==", email).where("senha", "==", senha)
+            .get().then((usuarioMindConsultaSnap) => {
+              if (usuarioMindConsultaSnap.empty) {
+                HttpUtil.falha("Usuário ou senha incorretos/nulos!", response);
               } else {
-                const usuario = ManterUsuario.toManterUsuario(usuarioConsultaSnap.docs[0].data());
-                HttpUtil.sucesso(usuario.toJson(), response);
+                const usuarioMind = ManterUsuarioMind.toManterUsuarioMind(usuarioMindConsultaSnap.docs[0].data());
+                HttpUtil.sucesso(usuarioMind.toJson(), response);
               }
             }).catch((erro) =>{
               HttpUtil.falha("Ops! Tive um erro no login: " + erro, response);
@@ -67,11 +67,11 @@ export class UsuarioService {
      * editarUsuario
      */
     public editarUsuario(request: Request, response: Response) {
-      const usuarioEditar = ManterUsuario.toManterUsuario(request.body);
-      if (usuarioEditar.isUsuarioValido() && usuarioEditar.id !== undefined && usuarioEditar.id !== "") {
-        this.db.doc(`usuariosGabriel/${usuarioEditar.id}`).set(usuarioEditar.toJson())
+      const usuarioMindEditar = ManterUsuarioMind.toManterUsuarioMind(request.body);
+      if (usuarioMindEditar.isUsuarioMindValido() && usuarioMindEditar.id !== undefined && usuarioMindEditar.id !== "") {
+        this.db.doc(`usuariosGabriel/${usuarioMindEditar.id}`).set(usuarioMindEditar.toJson())
             .then((resultadoSnap) => {
-              HttpUtil.sucesso(usuarioEditar.toJson(), response);
+              HttpUtil.sucesso(usuarioMindEditar.toJson(), response);
             }).catch((erro) =>{
               HttpUtil.falha("Houve erro ao editar:" + erro, response);
             });

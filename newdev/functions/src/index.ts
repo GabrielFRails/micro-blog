@@ -3,6 +3,8 @@ import * as express from "express";
 import * as admin from "firebase-admin";
 import {UsuarioService} from "./services/Usuario.service";
 import {PostagemService} from "./services/Postagem.service";
+import {LembreteService} from "./services/Lembrete.service";
+import {UsuarioMindService} from "./services/UsuarioMind.service";
 
 // Banco Firestore
 admin.initializeApp(functions.config().firebase);
@@ -23,7 +25,20 @@ usuarioExpressGabriel.post("/editarUsuario", (req, res) => usuarioService.editar
 
 export const usuarioGabriel = functions.https.onRequest(usuarioExpressGabriel);
 
-// Segunda Parte: Posts
+//Serviços do Usuários Mind
+
+const usuarioMindExpressGabriel = express();
+const usuarioMindService = new UsuarioMindService(db);
+
+usuarioMindExpressGabriel.post("/cadastrarUsuarioMind", (req, res) => usuarioMindService.cadastrarUsuario(req, res));
+
+usuarioMindExpressGabriel.post("/logarUsuarioMind", (req, res) => usuarioMindService.logarUsuario(req, res));
+
+usuarioMindExpressGabriel.post("/editarUsuarioMind", (req, res) => usuarioMindService.editarUsuario(req, res));
+
+export const usuarioMindGabriel = functions.https.onRequest(usuarioMindExpressGabriel);
+
+// Serviços das postagens do microblog
 
 const postagemExpressGabriel = express();
 const postagemService = new PostagemService(db);
@@ -43,3 +58,16 @@ postagemExpressGabriel.get("/removerLike", (req, res) => postagemService.remover
 postagemExpressGabriel.get("/consultarPublicacoes", (req, res) => postagemService.listaPublicacoes(req, res));
 
 export const feedGabriel = functions.https.onRequest(postagemExpressGabriel);
+
+//Serviços dos lembretes
+
+const lembreteExpressGabriel = express();
+const lembreteService = new LembreteService(db);
+
+lembreteExpressGabriel.post("/manterLembrete", (req, res) => lembreteService.manterLembrete(req, res));
+
+lembreteExpressGabriel.post("/exlcuirLembrete", (req, res) => lembreteService.exlcuirLembrete(req, res));
+
+lembreteExpressGabriel.post("/listarLembretes", (req, res) => lembreteService.listarLembretes(req, res));
+
+export const lembretesGabriel = functions.https.onRequest(lembreteExpressGabriel);

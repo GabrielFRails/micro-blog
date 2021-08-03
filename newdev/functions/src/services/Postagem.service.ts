@@ -79,13 +79,13 @@ export class PostagemService {
         this.db.doc(`publicacoesGabriel/${request.query.id}`).delete().then((_) =>{
           HttpUtil.sucesso("Post Excluído com sucesso", response);
         }).catch((erro) => {
-          HttpUtil.falha("Ops! Ocorreu um erro!" + erro, response);
+          HttpUtil.falha("Ops! Ocorreu um erro na hora de excluir sua publicação!" + erro, response);
         });
       }
     }
 
     /**
-     * excluirPostagem
+     * excluirComentário
      */
     public excluirComentario(request: Request, response: Response) {
       const idPostagem = request.query.id;
