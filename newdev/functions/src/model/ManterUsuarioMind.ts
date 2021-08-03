@@ -17,7 +17,7 @@ export class ManterUsuarioMind {
     }
 
     static toManterUsuarioMind(json: any = {}): ManterUsuarioMind {
-      return new ManterUsuarioMind(json.nome, json.email, json.senha, json.lembrete,json.id);
+      return new ManterUsuarioMind(json.nome, json.email, json.senha, json.lembrete, json.id);
     }
 
     public toJson(): any {

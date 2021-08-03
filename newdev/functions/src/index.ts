@@ -32,7 +32,7 @@ const usuarioMindService = new UsuarioMindService(db);
 
 usuarioMindExpressGabriel.post("/cadastrarUsuarioMind", (req, res) => usuarioMindService.cadastrarUsuario(req, res));
 
-usuarioMindExpressGabriel.post("/logarUsuarioMind", (req, res) => usuarioMindService.logarUsuario(req, res));
+usuarioMindExpressGabriel.get("/logarUsuarioMind", (req, res) => usuarioMindService.logarUsuario(req, res));
 
 usuarioMindExpressGabriel.post("/editarUsuarioMind", (req, res) => usuarioMindService.editarUsuario(req, res));
 
@@ -66,7 +66,7 @@ const lembreteService = new LembreteService(db);
 
 lembreteExpressGabriel.post("/manterLembrete", (req, res) => lembreteService.manterLembrete(req, res));
 
-lembreteExpressGabriel.post("/exlcuirLembrete", (req, res) => lembreteService.exlcuirLembrete(req, res));
+lembreteExpressGabriel.get("/exlcuirLembrete", (req, res) => lembreteService.exlcuirLembrete(req, res));
 
 lembreteExpressGabriel.post("/listarLembretes", (req, res) => lembreteService.listarLembretes(req, res));
 

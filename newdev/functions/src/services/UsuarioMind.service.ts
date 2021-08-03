@@ -69,7 +69,7 @@ export class UsuarioMindService {
     public editarUsuario(request: Request, response: Response) {
       const usuarioMindEditar = ManterUsuarioMind.toManterUsuarioMind(request.body);
       if (usuarioMindEditar.isUsuarioMindValido() && usuarioMindEditar.id !== undefined && usuarioMindEditar.id !== "") {
-        this.db.doc(`usuariosGabriel/${usuarioMindEditar.id}`).set(usuarioMindEditar.toJson())
+        this.db.doc(`usuariosMindGabriel/${usuarioMindEditar.id}`).set(usuarioMindEditar.toJson())
             .then((resultadoSnap) => {
               HttpUtil.sucesso(usuarioMindEditar.toJson(), response);
             }).catch((erro) =>{
