@@ -92,7 +92,7 @@ class UtilDialogo {
                                   Navigator.pop(mainContext);
                                   exibirInformacao(mainContext,
                                       titulo: "Sucesso!",
-                                      mensagem: "A Publiucação Foi Excluída!");
+                                      mensagem: "A Publicação Foi Excluída!");
                                 },
                                 erro: (mensagem) {
                                   Navigator.pop(mainContext);

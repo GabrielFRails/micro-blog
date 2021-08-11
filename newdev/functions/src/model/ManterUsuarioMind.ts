@@ -2,13 +2,13 @@ export class ManterUsuarioMind {
     nome?: string;
     email?: string;
     senha?: string;
-    lembrete?: string;
+    mensagem?: string;
     id?: string;
-    constructor(nome?: string, email?: string, senha?: string, lembrete?: string, id?: string) {
+    constructor(nome?: string, email?: string, senha?: string, mensagem?: string, id?: string) {
       this.nome = nome;
       this.email = email;
       this.senha = senha;
-      this.lembrete = lembrete;
+      this.mensagem = mensagem;
       this.id = id;
     }
 
@@ -17,7 +17,7 @@ export class ManterUsuarioMind {
     }
 
     static toManterUsuarioMind(json: any = {}): ManterUsuarioMind {
-      return new ManterUsuarioMind(json.nome, json.email, json.senha, json.lembrete, json.id);
+      return new ManterUsuarioMind(json.nome, json.email, json.senha, json.mensagem, json.id);
     }
 
     public toJson(): any {

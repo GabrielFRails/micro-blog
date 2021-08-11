@@ -24,15 +24,15 @@ export class Lembrete {
 
     public isEmocaoValida(): boolean {
       switch (this.emocao) {
-        case "EXTRAVAGANTE":
+        case "ALEGRIA":
           return true;
-        case "BEM":
+        case "TRISTEZA":
           return true;
-        case "REGULAR":
+        case "MEDO":
           return true;
-        case "MAL":
+        case "NOJO":
           return true;
-        case "PÉSSIMO":
+        case "RAIVA":
           return true;
         default:
           return false;
